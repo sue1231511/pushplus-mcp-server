@@ -52,6 +52,22 @@ def oauth_authorization_server():
         "scopes_supported": ["mcp:tools"]
     })
 
+@app.route('/.well-known/openid-configuration', methods=['GET'])
+def openid_configuration():
+    """OpenID Connect Discovery endpoint"""
+    server_url = get_server_url()
+    return jsonify({
+        "issuer": server_url,
+        "authorization_endpoint": f"{server_url}/authorize",
+        "token_endpoint": f"{server_url}/token",
+        "registration_endpoint": f"{server_url}/register",
+        "response_types_supported": ["code"],
+        "grant_types_supported": ["authorization_code", "refresh_token"],
+        "token_endpoint_auth_methods_supported": ["none", "client_secret_post"],
+        "code_challenge_methods_supported": ["S256"],
+        "scopes_supported": ["openid", "mcp:tools"]
+    })
+
 # Dynamic Client Registration
 @app.route('/register', methods=['POST'])
 def register_client():

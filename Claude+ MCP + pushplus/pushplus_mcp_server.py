@@ -423,4 +423,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     print(f"PushPlus MCP Server v3 启动在端口 {port}")
     print(f"Server URL: {get_server_url()}")
-    app.run(host="0.0.0.0", port=port))
+    app.run(host="0.0.0.0", port=port)
